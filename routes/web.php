@@ -30,9 +30,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard'])->name('admin.dashboard');
+});
 
-Route::get('/agent/dashboard', [AgentController::class, 'agentDashboard'])->name('agent.dashboard');
-
+Route::middleware(['auth', 'role:agent'])->group(function () {
+    Route::get('/agent/dashboard', [AgentController::class, 'agentDashboard'])->name('agent.dashboard');
+});
 
 require __DIR__.'/auth.php';

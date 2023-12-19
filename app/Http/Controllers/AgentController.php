@@ -8,7 +8,7 @@ use Illuminate\View\View;
 
 class AgentController extends Controller
 {
-    public function agentDashboard(): View
+    public function dashboard(): View
     {
         return view('agent.agentDashboard');
     }
